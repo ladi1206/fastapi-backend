@@ -7,6 +7,20 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 
+# Allow requests from your frontend origin
+origins = [
+    "http://localhost:3000",
+    "https://your-deployed-frontend-url.com"  # you can add this when deployed
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,  # or use ["*"] for all origins (not recommended for prod)
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 # Dependency
 def get_db():
     db = SessionLocal()
