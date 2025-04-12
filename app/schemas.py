@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-
+from fastapi.middleware.cors import CORSMiddleware
 class TaskBase(BaseModel):
     title: str
     description: str = ""
